@@ -1,0 +1,24 @@
+# Node.js dependencies (если не нужен на сервере)
+node_modules/
+
+# SASS cache
+.sass-cache/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# VSCode settings
+.vscode/
+
+# Logs
+*.log
+
+# OS generated files
+*.swp
+
+# Build artifacts (если появятся)
+dist/
+build/
+
+# Не игнорируйте папки css, js, assets, index.html 
