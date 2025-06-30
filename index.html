@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/main.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/fr.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>admin-panel</title>
+  </head>
+  <body>
+    <section class="container">
+      <div class="header">
+        <div class="header-left">
+          <img src="assets/icons/main_icon.svg" alt="logo" />
+          <span>Название сайта</span>
+        </div>
+        <img src="assets/icons/user_icon.svg" alt="logo" />
+      </div>
+    </section>
+      <div class="filters">
+        <div class="filter">
+          <span>Recruteur</span>
+          <div class="custom-dropdown" data-filter="recruteur">
+            <div class="dropdown-selected">Tous</div>
+            <div class="dropdown-list">
+              <div class="dropdown-item selected" data-value="tous">Tous</div>
+              <div class="dropdown-item" data-value="kelyan">Kelyan</div>
+              <div class="dropdown-item" data-value="kelly">Kelly</div>
+            </div>
+          </div>
+        </div>
+        <div class="filter">
+          <span>Type</span>
+          <div class="custom-dropdown" data-filter="type">
+            <div class="dropdown-selected">Tous</div>
+            <div class="dropdown-list">
+              <div class="dropdown-item selected" data-value="tous">Tous</div>
+              <div class="dropdown-item" data-value="type1">Type 1</div>
+              <div class="dropdown-item" data-value="type2">Type 2</div>
+            </div>
+          </div>
+        </div>
+        <div class="filter">
+          <span>Voyant</span>
+          <div class="custom-dropdown" data-filter="voyant">
+            <div class="dropdown-selected">Tous</div>
+            <div class="dropdown-list">
+              <div class="search_container">
+                <img src="assets/icons/search_icon.svg" alt="search" />
+                <input class="search-input" type="text" placeholder="Recherche" />
+              </div>
+              <label class="dropdown-item">
+                <input
+                  type="checkbox"
+                  class="voyant-checkbox"
+                  data-value="tous"
+                  checked
+                />
+                Tous
+              </label>
+              <label class="dropdown-item">
+                <input
+                  type="checkbox"
+                  class="voyant-checkbox"
+                  checked
+                  data-value="voyant1"
+                />
+                Voyant 1
+              </label>
+              <label class="dropdown-item">
+                <input
+                  type="checkbox"
+                  class="voyant-checkbox"
+                  checked
+                  data-value="voyant2"
+                />
+                Voyant 2
+              </label>
+              <label class="dropdown-item">
+                <input
+                  type="checkbox"
+                  class="voyant-checkbox"
+                  checked
+                  data-value="voyant2"
+                />
+                Voyant 3
+              </label>
+              <label class="dropdown-item">
+                <input
+                  type="checkbox"
+                  class="voyant-checkbox"
+                  checked
+                  data-value="voyant2"
+                />
+                Voyant 4
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="switcher">
+          <button class="switcher-btn">Jour</button>
+          <button class="switcher-btn active">Semaine</button>
+          <button class="switcher-btn">Mois</button>
+          <button class="switcher-btn">Année</button>
+        </div>
+        <input
+          id="datepicker"
+          class="filter-datepicker"
+          placeholder="Sélectionnez une date"
+        />
+        <div class="filter">
+          <span>Grouper par</span>
+          <div class="custom-dropdown" data-filter="mois">
+            <div class="dropdown-selected">Mois</div>
+            <div class="dropdown-list">
+              <div class="dropdown-item selected" data-value="tous">Jours</div>
+              <div class="dropdown-item" data-value="kelyan">Semaines</div>
+              <div class="dropdown-item" data-value="kelly">Mois</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <section class="container">
+      <div class="stats">
+        <div class="stats-card">
+          <div class="stats-title">
+            <input type="checkbox" value="Voyants actifs" checked />
+            <span>Voyants actifs</span>
+          </div>
+          <div class="stats-value">
+            <span>159</span>
+            <div class="stats-change">
+              <img src="assets/icons/arrow_down.svg" alt="arrow_down" />
+              <span>-15%</span>
+            </div>
+          </div>
+        </div>
+        <div class="divider-cards"></div>
+        <div class="stats-card">
+          <div class="stats-title">
+            <input type="checkbox" value="Revenus totaux" checked />
+            <span>Revenus totaux</span>
+          </div>
+          <div class="stats-value">
+            <span>1590$</span>
+            <div class="stats-change">
+              <img src="assets/icons/arrow_down.svg" alt="arrow_down" />
+              <span>-15%</span>
+            </div>
+          </div>
+        </div>
+        <div class="divider-cards"></div>
+        <div class="stats-card">
+          <div class="stats-title">
+            <input type="checkbox" value="Heures en ligne" checked />
+            <span>Heures en ligne</span>
+          </div>
+          <div class="stats-value">
+            <span>10000,2h</span>
+            <div class="stats-change">
+              <img src="assets/icons/arrow_down.svg" alt="arrow_down" />
+              <span>-15%</span>
+            </div>
+          </div>
+        </div>
+        <div class="divider-cards"></div>
+        <div class="stats-card">
+          <div class="stats-title">
+            <input type="checkbox" value="Nombre d'appels" checked />
+            <span>Nombre d'appels</span>
+          </div>
+          <div class="stats-value">
+            <span>1590</span>
+            <div class="stats-change">
+              <img src="assets/icons/arrow_down.svg" alt="arrow_down" />
+              <span>-15%</span>
+            </div>
+          </div>
+        </div>
+        <div class="divider-cards"></div>
+        <div class="stats-card">
+          <div class="stats-title">
+            <input type="checkbox" value="Durée" checked />
+            <span>Durée</span>
+          </div>
+          <div class="stats-value">
+            <span>00:50:00</span>
+            <div class="stats-change">
+              <img src="assets/icons/arrow_down.svg" alt="arrow_down" />
+              <span>-15%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="container">
+      <div class="chart-container">
+        <canvas id="chart"></canvas>
+      </div>
+    </section>
+    <section class="container">
+      <div class="table-block">
+        <div
+          class="table-header-row"
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+          "
+        >
+          <label class="switch">
+            <input type="checkbox" />
+            <span class="slider"></span>
+            <span class="switch-label">Utiliser le regroupement</span>
+          </label>
+          <button class="xls-btn">
+            <img src="assets/icons/download_icon.svg" alt="download_icon" />
+            Télécharger XLS
+          </button>
+        </div>
+        <table class="stats-table">
+          <thead>
+            <tr>
+              <th class="grouping-col extra-col">Début</th>
+              <th class="grouping-col extra-col">Fin</th>
+              <th>Voyant</th>
+              <th>Date contrat</th>
+              <th>Revenu, €</th>
+              <th>% du total</th>
+              <th>Heures en ligne</th>
+              <th>Appels</th>
+              <th>Durée</th>
+              <th>Plan. fixe</th>
+              <th>Pénalités</th>
+              <th>Déplanif.</th>
+              <th>Recruteur</th>
+              <th>Statut</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="grouping-col extra-col">01.01.2025</td>
+              <td class="grouping-col extra-col">31.01.2025</td>
+              <td>
+                <div>
+                  <div class="table-name">Olivia Rhye</div>
+                  <div class="table-id">ID 0934</div>
+                </div>
+              </td>
+              <td>01.04.2025</td>
+              <td>
+                80000
+                <div class="table-down">
+                  <img src="assets/icons/arrow_down.svg" alt="arrow_down" />-15%
+                </div>
+              </td>
+              <td>30</td>
+              <td>
+                10000,2h
+                <div class="table-down">
+                  <img src="assets/icons/arrow_down.svg" alt="arrow_down" />-15%
+                </div>
+              </td>
+              <td>
+                900030
+                <div class="table-down">
+                  <img src="assets/icons/arrow_down.svg" alt="arrow_down" />-15%
+                </div>
+              </td>
+              <td>
+                11:05:33
+                <div class="table-down">
+                  <img src="assets/icons/arrow_down.svg" alt="arrow_down" />-15%
+                </div>
+              </td>
+              <td>
+                <img src="assets/icons/plan_fix_icon.svg" alt="plan_fix_icon" />
+              </td>
+              <td>11</td>
+              <td>11</td>
+              <td>Mark</td>
+              <td>
+                <span class="table-status"><span>● </span>Actif</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="grouping-col extra-col">01.01.2025</td>
+              <td class="grouping-col extra-col">31.01.2025</td>
+              <td>
+                <div>
+                  <div class="table-name">Olivia Rhye</div>
+                  <div class="table-id">ID 0934</div>
+                </div>
+              </td>
+
+              <td>01.04.2025</td>
+              <td>
+                80000
+                <div class="table-down">
+                  <img src="assets/icons/arrow_down.svg" alt="arrow_down" />-15%
+                </div>
+              </td>
+              <td>30</td>
+              <td>
+                10000,2h
+                <div class="table-down">
+                  <img src="assets/icons/arrow_down.svg" alt="arrow_down" />-15%
+                </div>
+              </td>
+              <td>
+                900030
+                <div class="table-down">
+                  <img src="assets/icons/arrow_down.svg" alt="arrow_down" />-15%
+                </div>
+              </td>
+              <td>
+                11:05:33
+                <div class="table-down">
+                  <img src="assets/icons/arrow_down.svg" alt="arrow_down" />-15%
+                </div>
+              </td>
+              <td>
+                <img src="assets/icons/plan_fix_icon.svg" alt="plan_fix_icon" />
+              </td>
+              <td>11</td>
+              <td>11</td>
+              <td>Mark</td>
+              <td>
+                <span class="table-status"><span>● </span>Actif</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="grouping-col extra-col">01.01.2025</td>
+              <td class="grouping-col extra-col">31.01.2025</td>
+              <td>
+                <div>
+                  <div class="table-name">Olivia Rhye</div>
+                  <div class="table-id">ID 0934</div>
+                </div>
+              </td>
+
+              <td>01.04.2025</td>
+              <td>
+                80000
+                <div class="table-down">
+                  <img src="assets/icons/arrow_down.svg" alt="arrow_down" />-15%
+                </div>
+              </td>
+              <td>30</td>
+              <td>
+                10000,2h
+                <div class="table-down">
+                  <img src="assets/icons/arrow_down.svg" alt="arrow_down" />-15%
+                </div>
+              </td>
+              <td>
+                900030
+                <div class="table-down">
+                  <img src="assets/icons/arrow_down.svg" alt="arrow_down" />-15%
+                </div>
+              </td>
+              <td>
+                11:05:33
+                <div class="table-down">
+                  <img src="assets/icons/arrow_down.svg" alt="arrow_down" />-15%
+                </div>
+              </td>
+              <td>
+                <img src="assets/icons/plan_fix_icon.svg" alt="plan_fix_icon" />
+              </td>
+              <td>11</td>
+              <td>11</td>
+              <td>Mark</td>
+              <td>
+                <span class="table-status"><span>● </span>Actif</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="grouping-col extra-col">01.01.2025</td>
+              <td class="grouping-col extra-col">31.01.2025</td>
+              <td>
+                <div>
+                  <div class="table-name">Olivia Rhye</div>
+                  <div class="table-id">ID 0934</div>
+                </div>
+              </td>
+
+              <td>01.04.2025</td>
+              <td>
+                80000
+                <div class="table-down">
+                  <img src="assets/icons/arrow_down.svg" alt="arrow_down" />-15%
+                </div>
+              </td>
+              <td>30</td>
+              <td>
+                10000,2h
+                <div class="table-down">
+                  <img src="assets/icons/arrow_down.svg" alt="arrow_down" />-15%
+                </div>
+              </td>
+              <td>
+                900030
+                <div class="table-down">
+                  <img src="assets/icons/arrow_down.svg" alt="arrow_down" />-15%
+                </div>
+              </td>
+              <td>
+                11:05:33
+                <div class="table-down">
+                  <img src="assets/icons/arrow_down.svg" alt="arrow_down" />-15%
+                </div>
+              </td>
+              <td>
+                <img src="assets/icons/plan_fix_icon.svg" alt="plan_fix_icon" />
+              </td>
+              <td>11</td>
+              <td>11</td>
+              <td>Mark</td>
+              <td>
+                <span class="table-status"><span>● </span>Actif</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="grouping-col extra-col">01.01.2025</td>
+              <td class="grouping-col extra-col">31.01.2025</td>
+              <td>
+                <div>
+                  <div class="table-name">Olivia Rhye</div>
+                  <div class="table-id">ID 0934</div>
+                </div>
+              </td>
+
+              <td>01.04.2025</td>
+              <td>
+                80000
+                <div class="table-down">
+                  <img src="assets/icons/arrow_down.svg" alt="arrow_down" />-15%
+                </div>
+              </td>
+              <td>30</td>
+              <td>
+                10000,2h
+                <div class="table-down">
+                  <img src="assets/icons/arrow_down.svg" alt="arrow_down" />-15%
+                </div>
+              </td>
+              <td>
+                900030
+                <div class="table-down">
+                  <img src="assets/icons/arrow_down.svg" alt="arrow_down" />-15%
+                </div>
+              </td>
+              <td>
+                11:05:33
+                <div class="table-down">
+                  <img src="assets/icons/arrow_down.svg" alt="arrow_down" />-15%
+                </div>
+              </td>
+              <td>
+                <img src="assets/icons/plan_fix_icon.svg" alt="plan_fix_icon" />
+              </td>
+              <td>11</td>
+              <td>11</td>
+              <td>Mark</td>
+              <td>
+                <span class="table-status"><span>● </span>Actif</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="grouping-col extra-col">01.01.2025</td>
+              <td class="grouping-col extra-col">31.01.2025</td>
+              <td>
+                <div>
+                  <div class="table-name">Olivia Rhye</div>
+                  <div class="table-id">ID 0934</div>
+                </div>
+              </td>
+
+              <td>01.04.2025</td>
+              <td>
+                80000
+                <div class="table-down">
+                  <img src="assets/icons/arrow_down.svg" alt="arrow_down" />-15%
+                </div>
+              </td>
+              <td>30</td>
+              <td>
+                10000,2h
+                <div class="table-down">
+                  <img src="assets/icons/arrow_down.svg" alt="arrow_down" />-15%
+                </div>
+              </td>
+              <td>
+                900030
+                <div class="table-down">
+                  <img src="assets/icons/arrow_down.svg" alt="arrow_down" />-15%
+                </div>
+              </td>
+              <td>
+                11:05:33
+                <div class="table-down">
+                  <img src="assets/icons/arrow_down.svg" alt="arrow_down" />-15%
+                </div>
+              </td>
+              <td>
+                <img src="assets/icons/plan_fix_icon.svg" alt="plan_fix_icon" />
+              </td>
+              <td>11</td>
+              <td>11</td>
+              <td>Mark</td>
+              <td>
+                <span class="table-status"><span>● </span>Actif</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="grouping-col extra-col">01.01.2025</td>
+              <td class="grouping-col extra-col">31.01.2025</td>
+              <td>
+                <div>
+                  <div class="table-name">Olivia Rhye</div>
+                  <div class="table-id">ID 0934</div>
+                </div>
+              </td>
+
+              <td>01.04.2025</td>
+              <td>
+                80000
+                <div class="table-down">
+                  <img src="assets/icons/arrow_down.svg" alt="arrow_down" />-15%
+                </div>
+              </td>
+              <td>30</td>
+              <td>
+                10000,2h
+                <div class="table-down">
+                  <img src="assets/icons/arrow_down.svg" alt="arrow_down" />-15%
+                </div>
+              </td>
+              <td>
+                900030
+                <div class="table-down">
+                  <img src="assets/icons/arrow_down.svg" alt="arrow_down" />-15%
+                </div>
+              </td>
+              <td>
+                11:05:33
+                <div class="table-down">
+                  <img src="assets/icons/arrow_down.svg" alt="arrow_down" />-15%
+                </div>
+              </td>
+              <td>
+                <img src="assets/icons/plan_fix_icon.svg" alt="plan_fix_icon" />
+              </td>
+              <td>11</td>
+              <td>11</td>
+              <td>Mark</td>
+              <td>
+                <span class="table-status"><span>● </span>Actif</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="grouping-col extra-col">01.01.2025</td>
+              <td class="grouping-col extra-col">31.01.2025</td>
+              <td>
+                <div>
+                  <div class="table-name">Olivia Rhye</div>
+                  <div class="table-id">ID 0934</div>
+                </div>
+              </td>
+
+              <td>01.04.2025</td>
+              <td>
+                80000
+                <div class="table-down">
+                  <img src="assets/icons/arrow_down.svg" alt="arrow_down" />-15%
+                </div>
+              </td>
+              <td>30</td>
+              <td>
+                10000,2h
+                <div class="table-down">
+                  <img src="assets/icons/arrow_down.svg" alt="arrow_down" />-15%
+                </div>
+              </td>
+              <td>
+                900030
+                <div class="table-down">
+                  <img src="assets/icons/arrow_down.svg" alt="arrow_down" />-15%
+                </div>
+              </td>
+              <td>
+                11:05:33
+                <div class="table-down">
+                  <img src="assets/icons/arrow_down.svg" alt="arrow_down" />-15%
+                </div>
+              </td>
+              <td>
+                <img src="assets/icons/plan_fix_icon.svg" alt="plan_fix_icon" />
+              </td>
+              <td>11</td>
+              <td>11</td>
+              <td>Mark</td>
+              <td>
+                <span class="table-status"><span>● </span>Actif</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="grouping-col extra-col">01.01.2025</td>
+              <td class="grouping-col extra-col">31.01.2025</td>
+              <td>
+                <div>
+                  <div class="table-name">Olivia Rhye</div>
+                  <div class="table-id">ID 0934</div>
+                </div>
+              </td>
+
+              <td>01.04.2025</td>
+              <td>
+                80000
+                <div class="table-down">
+                  <img src="assets/icons/arrow_down.svg" alt="arrow_down" />-15%
+                </div>
+              </td>
+              <td>30</td>
+              <td>
+                10000,2h
+                <div class="table-down">
+                  <img src="assets/icons/arrow_down.svg" alt="arrow_down" />-15%
+                </div>
+              </td>
+              <td>
+                900030
+                <div class="table-down">
+                  <img src="assets/icons/arrow_down.svg" alt="arrow_down" />-15%
+                </div>
+              </td>
+              <td>
+                11:05:33
+                <div class="table-down">
+                  <img src="assets/icons/arrow_down.svg" alt="arrow_down" />-15%
+                </div>
+              </td>
+              <td>
+                <img src="assets/icons/plan_fix_icon.svg" alt="plan_fix_icon" />
+              </td>
+              <td>11</td>
+              <td>11</td>
+              <td>Mark</td>
+              <td>
+                <span class="table-status"><span>● </span>Actif</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="grouping-col extra-col">01.01.2025</td>
+              <td class="grouping-col extra-col">31.01.2025</td>
+              <td>
+                <div>
+                  <div class="table-name">Olivia Rhye</div>
+                  <div class="table-id">ID 0934</div>
+                </div>
+              </td>
+
+              <td>01.04.2025</td>
+              <td>
+                80000
+                <div class="table-down">
+                  <img src="assets/icons/arrow_down.svg" alt="arrow_down" />-15%
+                </div>
+              </td>
+              <td>30</td>
+              <td>
+                10000,2h
+                <div class="table-down">
+                  <img src="assets/icons/arrow_down.svg" alt="arrow_down" />-15%
+                </div>
+              </td>
+              <td>
+                900030
+                <div class="table-down">
+                  <img src="assets/icons/arrow_down.svg" alt="arrow_down" />-15%
+                </div>
+              </td>
+              <td>
+                11:05:33
+                <div class="table-down">
+                  <img src="assets/icons/arrow_down.svg" alt="arrow_down" />-15%
+                </div>
+              </td>
+              <td>
+                <img src="assets/icons/plan_fix_icon.svg" alt="plan_fix_icon" />
+              </td>
+              <td>11</td>
+              <td>11</td>
+              <td>Mark</td>
+              <td>
+                <span class="table-status"><span>● </span>Actif</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="grouping-col extra-col">01.01.2025</td>
+              <td class="grouping-col extra-col">31.01.2025</td>
+              <td>
+                <div>
+                  <div class="table-name">Olivia Rhye</div>
+                  <div class="table-id">ID 0934</div>
+                </div>
+              </td>
+
+              <td>01.04.2025</td>
+              <td>
+                80000
+                <div class="table-down">
+                  <img src="assets/icons/arrow_down.svg" alt="arrow_down" />-15%
+                </div>
+              </td>
+              <td>30</td>
+              <td>
+                10000,2h
+                <div class="table-down">
+                  <img src="assets/icons/arrow_down.svg" alt="arrow_down" />-15%
+                </div>
+              </td>
+              <td>
+                900030
+                <div class="table-down">
+                  <img src="assets/icons/arrow_down.svg" alt="arrow_down" />-15%
+                </div>
+              </td>
+              <td>
+                11:05:33
+                <div class="table-down">
+                  <img src="assets/icons/arrow_down.svg" alt="arrow_down" />-15%
+                </div>
+              </td>
+              <td>
+                <img src="assets/icons/plan_fix_icon.svg" alt="plan_fix_icon" />
+              </td>
+              <td>11</td>
+              <td>11</td>
+              <td>Mark</td>
+              <td>
+                <span class="table-status"><span>● </span>Actif</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="grouping-col extra-col">01.01.2025</td>
+              <td class="grouping-col extra-col">31.01.2025</td>
+              <td>
+                <div>
+                  <div class="table-name">Olivia Rhye</div>
+                  <div class="table-id">ID 0934</div>
+                </div>
+              </td>
+
+              <td>01.04.2025</td>
+              <td>
+                80000
+                <div class="table-down">
+                  <img src="assets/icons/arrow_down.svg" alt="arrow_down" />-15%
+                </div>
+              </td>
+              <td>30</td>
+              <td>
+                10000,2h
+                <div class="table-down">
+                  <img src="assets/icons/arrow_down.svg" alt="arrow_down" />-15%
+                </div>
+              </td>
+              <td>
+                900030
+                <div class="table-down">
+                  <img src="assets/icons/arrow_down.svg" alt="arrow_down" />-15%
+                </div>
+              </td>
+              <td>
+                11:05:33
+                <div class="table-down">
+                  <img src="assets/icons/arrow_down.svg" alt="arrow_down" />-15%
+                </div>
+              </td>
+              <td>
+                <img src="assets/icons/plan_fix_icon.svg" alt="plan_fix_icon" />
+              </td>
+              <td>11</td>
+              <td>11</td>
+              <td>Mark</td>
+              <td>
+                <span class="table-status"><span>● </span>Actif</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </body>
+  <script src="js/main.js"></script>
+</html>
