@@ -26,6 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
       mode: "range",
       dateFormat: "d.m.y",
       allowInput: true,
+      showMonths: 2
     });
   }
 
