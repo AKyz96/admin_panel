@@ -25,6 +25,45 @@ document.addEventListener("DOMContentLoaded", function () {
       },
       mode: "range",
       dateFormat: "d.m.y",
+      allowInput: true,
+    });
+  }
+
+  const dateInput = document.getElementById("datepicker");
+  if (dateInput && window.flatpickr) {
+    dateInput.addEventListener("input", function () {
+      let val = this.value.replace(/\D/g, "");
+      let formatted = "";
+
+      // Первая дата
+      if (val.length > 0) formatted += val.slice(0, 2);
+      if (val.length > 2) formatted += "." + val.slice(2, 4);
+      if (val.length > 4) formatted += "." + val.slice(4, 6);
+
+      // Если есть 6 символов (первая дата полностью) и начинается вторая дата
+      if (val.length > 6) {
+        formatted += " - ";
+        // Вторая дата
+        formatted += val.slice(6, 8);
+        if (val.length > 8) formatted += "." + val.slice(8, 10);
+        if (val.length > 10) formatted += "." + val.slice(10, 12);
+      }
+
+      this.value = formatted;
+
+      // flatpickr: если введено 6 или 12 цифр (две даты полностью)
+      if (window.flatpickr && this._flatpickr) {
+        if (val.length === 6) {
+          // одна дата
+          const d = formatted.slice(0, 8); // 09.06.25
+          this._flatpickr.setDate(d, true, "d.m.y");
+        } else if (val.length === 12) {
+          // диапазон
+          const d1 = formatted.slice(0, 8); // 09.06.25
+          const d2 = formatted.slice(11, 19); // 20.06.25
+          this._flatpickr.setDate([d1, d2], true, "d.m.y");
+        }
+      }
     });
   }
 
@@ -334,6 +373,8 @@ document.addEventListener("DOMContentLoaded", function () {
           borderColor: active[0].color,
           pointRadius: 0.5,
           pointHoverBorderWidth: 2,
+          pointHoverBackgroundColor: "#fff",
+          tooltip: { enabled: false },
         },
       ];
     }
@@ -346,6 +387,8 @@ document.addEventListener("DOMContentLoaded", function () {
           borderColor: active[0].color,
           pointRadius: 0.5,
           pointHoverBorderWidth: 2,
+          pointHoverBackgroundColor: "#fff",
+          tooltip: { enabled: false },
         },
         {
           ...active[1],
@@ -353,18 +396,39 @@ document.addEventListener("DOMContentLoaded", function () {
           borderColor: active[1].color,
           pointRadius: 0.5,
           pointHoverBorderWidth: 2,
+          pointHoverBackgroundColor: "#fff",
+          tooltip: { enabled: false },
         },
       ];
     }
 
     if (active.length >= 3) {
-      return active.map((line, idx) => ({
-        ...line,
-        yAxisID: `y${idx}`,
-        borderColor: line.color,
-        pointRadius: 0.5,
-        pointHoverBorderWidth: 2,
-      }));
+      const gridHelper = {
+        label: "grid-helper",
+        data: active[0].data.map(() => 0),
+        yAxisID: "yGrid",
+        borderWidth: 0,
+        pointRadius: 0,
+        backgroundColor: "rgba(0,0,0,0)",
+        borderColor: "rgba(0,0,0,0)",
+        order: 0,
+        fill: false,
+        hoverRadius: 0,
+        pointHoverRadius: 0,
+        tooltip: { enabled: false }
+      };
+      return [
+        ...active.map((line, idx) => ({
+          ...line,
+          yAxisID: `y${idx}`,
+          borderColor: line.color,
+          pointRadius: 0.5,
+          pointHoverBorderWidth: 2,
+          pointHoverBackgroundColor: "#fff",
+          tooltip: { enabled: false },
+        })),
+        gridHelper
+      ];
     }
 
     return active.map((line) => ({
@@ -373,6 +437,8 @@ document.addEventListener("DOMContentLoaded", function () {
       borderColor: line.color,
       pointRadius: 0.5,
       pointHoverBorderWidth: 2,
+      pointHoverBackgroundColor: "#fff",
+      tooltip: { enabled: false },
     }));
   }
 
@@ -388,11 +454,7 @@ document.addEventListener("DOMContentLoaded", function () {
       if (min === max) {
         min = 0;
         max = max + 1;
-      } else {
-        const padding = (max - min) * 0.1;
-        min -= padding;
-        max += padding;
-      }
+      } 
       return {
         y: {
           type: "linear",
@@ -435,18 +497,10 @@ document.addEventListener("DOMContentLoaded", function () {
       if (minLeft === maxLeft) {
         minLeft = 0;
         maxLeft = maxLeft + 1;
-      } else {
-        const padding = (maxLeft - minLeft) * 0.1;
-        minLeft -= padding;
-        maxLeft += padding;
       }
       if (minRight === maxRight) {
         minRight = 0;
         maxRight = maxRight + 1;
-      } else {
-        const padding = (maxRight - minRight) * 0.1;
-        minRight -= padding;
-        maxRight += padding;
       }
       return {
         y: {
@@ -495,6 +549,16 @@ document.addEventListener("DOMContentLoaded", function () {
           grid: { display: false },
           ticks: { color: "#222" },
         },
+        yGrid: {
+          type: "linear",
+          position: "left",
+          display: true,
+          grid: { drawOnChartArea: true, color: "#e9edf1" },
+          min: 0,
+          max: 1,
+          ticks: { display: false },
+          title: { display: false }
+        }
       };
       activeLines.forEach((line, idx) => {
         let min = Math.min(...line.data);
@@ -502,10 +566,6 @@ document.addEventListener("DOMContentLoaded", function () {
         if (min === max) {
           min = 0;
           max = max + 1;
-        } else {
-          const padding = (max - min) * 0.1;
-          min -= padding;
-          max += padding;
         }
         scales[`y${idx}`] = {
           type: "linear",
@@ -513,20 +573,8 @@ document.addEventListener("DOMContentLoaded", function () {
           min: min,
           max: max,
           display: false,
-          grid: { drawOnChartArea: idx === 0, color: "#e9edf1" },
-          ticks: {
-            callback: function (value) {
-              if (line.label === "Durée") {
-                const minutes = value;
-                const roundedMinutes = Math.round(minutes);
-                const h = String(Math.floor(roundedMinutes / 60)).padStart(2, "0");
-                const m = String(roundedMinutes % 60).padStart(2, "0");
-                return `${h}:${m}:00`;
-              }
-              return value;
-            },
-            color: "#222",
-          },
+          grid: { drawOnChartArea: false },
+          ticks: { display: false }
         };
       });
       return scales;
@@ -634,7 +682,8 @@ document.addEventListener("DOMContentLoaded", function () {
               const title = tooltipModel.title[0] || "";
               let innerHtml = `<div style="font-weight:700;font-size:15px;margin-bottom:10px;">${title}</div>`;
 
-              tooltipModel.dataPoints.forEach(function (item) {
+              const filteredPoints = tooltipModel.dataPoints.filter(item => item.dataset.label !== "grid-helper");
+              filteredPoints.forEach(function (item) {
                 let value = item.raw;
                 if (item.dataset.label === "Durée") {
                   const minutes = value;

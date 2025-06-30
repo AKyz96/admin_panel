@@ -82,11 +82,16 @@ body {
   border: none;
   padding: 8px 16px;
   border-radius: 8px;
+  line-height: 20px;
   font-size: 14px;
   font-weight: 400;
   color: #101828;
   cursor: pointer;
   transition: background 0.2s;
+}
+
+.switcher-btn:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
 .switcher-btn.active {
@@ -152,12 +157,18 @@ body {
   box-shadow: 0 2px 8px rgba(255, 255, 255, 0);
   padding: 10px 38px 10px 14px;
   font-size: 14px;
+  line-height: 22px;
   color: #101828;
   font-weight: 500;
   cursor: pointer;
   transition: border 0.2s, box-shadow 0.2s;
   position: relative;
 }
+
+.dropdown-selected:hover {
+  border: 1px solid #d6bbfb
+}
+
 .dropdown-selected:after {
   content: "";
   position: absolute;
@@ -240,7 +251,6 @@ body {
   background: #f9fafb;
 }
 
-/* Скрываем стандартный чекбокс */
 .voyant-checkbox {
   appearance: none;
   -webkit-appearance: none;
@@ -256,7 +266,6 @@ body {
   outline: none;
 }
 
-/* Стилизация состояния "checked" */
 .voyant-checkbox:checked {
   border-color: #7f56d9;
 }
@@ -316,10 +325,10 @@ body {
 .search-input {
   width: 114px;
   padding: 10px 14px 10px 40px; // слева место под иконку
-  border: none;
+  border: 1px solid #d0d5dd;
   border-radius: 10px;
   background: #fff;
-  box-shadow: 0 0 4px 0 #f4ebff, 0 1px 2px 0 rgba(16, 24, 40, 0.05);
+  box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
   font-size: 14px;
   color: #101828;
   outline: none;
@@ -358,6 +367,7 @@ body {
 
 .stats-title input[type="checkbox"] {
   accent-color: #ffbdbd;
+  cursor: pointer;
   width: 18px;
   height: 18px;
   border-radius: 4px;
@@ -388,7 +398,15 @@ body {
   background: #fff;
   border-radius: 16px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
-  padding: 24px;
+  padding: 24px 0;
+}
+
+.table-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding: 0 16px;
 }
 
 .stats-table {
@@ -399,7 +417,15 @@ body {
   background: transparent;
 }
 
-.stats-table th,
+.stats-table th {
+  padding: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 18px;
+  text-align: left;
+  cursor: pointer;
+}
+
 .stats-table td {
   padding: 16px 12px;
   font-size: 14px;
@@ -416,10 +442,13 @@ body {
   border-right: 1px solid #eaecf0;
 }
 
-.stats-table thead th {
+.stats-table thead{
   position: sticky;
-  top: 95px;
+  top: 100px;
   z-index: 2;
+}
+
+.stats-table thead th {
   color: #888;
   font-weight: 500;
   font-size: 12px;
@@ -469,17 +498,24 @@ body {
 }
 
 .table-status {
-  padding: 2px 8px 2px 6px;
+  padding: 4px 8px 4px 6px;
   background: #ecfdf3;
   border-radius: 16px;
   color: #027a48;
-  font-weight: 600;
-  font-size: 15px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 18px;
   white-space: nowrap;
 }
 
 .table-status span {
   color: #12b76a;
+}
+
+.voyant-header{
+  display: flex;
+  gap: 4px;
+  align-items: center;
 }
 
 .switch {
@@ -534,10 +570,11 @@ input:checked + .slider::before {
   border-radius: 10px;
   padding: 10px 38px 10px 14px;
   font-size: 14px;
+  line-height: 22px;
   color: #101828;
   background: #fff;
   outline: none;
-  width: 200px;
+  width: 210px;
   box-sizing: border-box;
   font-family: inherit;
   font-weight: 500;
@@ -549,8 +586,14 @@ input:checked + .slider::before {
 }
 
 .filter-datepicker:focus {
-  border-color: #a3a7b7;
+  border: 1px solid #d6bbfb;
+  box-shadow: 0 0 4px 0 #f4ebff, 0 1px 2px 0 rgba(16, 24, 40, 0.05);
 }
+
+.filter-datepicker:hover {
+  border: 1px solid #d6bbfb;
+}
+
 .filter-datepicker::-webkit-input-placeholder {
   color: #101828;
   opacity: 1;
@@ -568,14 +611,12 @@ input:checked + .slider::before {
   opacity: 1;
 }
 
-/* Стили для стрелки flatpickr */
 .filter-datepicker ~ .flatpickr-input[readonly] {
   background: none;
 }
 .flatpickr-input[readonly] {
   cursor: pointer;
 }
-/* Скрыть стандартную иконку flatpickr, если есть */
 .flatpickr-calendar.arrowTop:before,
 .flatpickr-calendar.arrowTop:after {
   display: none;
@@ -588,15 +629,33 @@ input:checked + .slider::before {
   color: #f5f2f4 !important;
   border: none !important;
 }
+
+.flatpickr-day.selected,
+.flatpickr-day.startRange,
+.flatpickr-day.endRange:hover {
+  background: #7c3aed !important;
+  color: #f5f2f4 !important;
+  border: none !important;
+}
+
 .flatpickr-day.inRange {
-  background: #f5f2f4 !important;
+  background: #f9fafb !important;
   color: #7c3aed !important;
+  box-shadow: -5px 0 0 #f9fafb, 5px 0 0 #f9fafb !important;
 }
 
 .flatpickr-day:hover {
   background: #f9fafb !important;
-  border-color: #f9fafb !important;
+  border-color: #d0d5dd !important;
   color: #7c3aed !important;
+}
+
+.flatpickr-day.selected.startRange + .endRange:not(:nth-child(7n + 1)) {
+  box-shadow: none !important;
+}
+
+.flatpickr-day.startRange.startRange + .endRange:not(:nth-child(7n + 1)) {
+  box-shadow: none !important;
 }
 
 .xls-btn {
