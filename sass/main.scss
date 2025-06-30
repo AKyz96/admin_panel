@@ -401,11 +401,17 @@ body {
   padding: 24px 0;
 }
 
+.table-header-row-container {
+  position:sticky;
+  padding: 10px 0px 20px 0px;
+  top: 100px;
+  background: #FFFFFF;
+}
+
 .table-header-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
   padding: 0 16px;
 }
 
@@ -444,7 +450,7 @@ body {
 
 .stats-table thead{
   position: sticky;
-  top: 100px;
+  top: 162px;
   z-index: 2;
 }
 
