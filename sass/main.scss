@@ -733,3 +733,14 @@ input:checked + .slider::before {
   .grouping-col {
   display: table-cell;
 }
+
+.date-picker-container {
+  position: relative;
+}
+
+.datepicker-arrow {
+  transition: transform 0.2s;
+}
+.datepicker-arrow--open {
+  transform: rotate(180deg);
+}

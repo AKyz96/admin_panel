@@ -26,7 +26,15 @@ document.addEventListener("DOMContentLoaded", function () {
       mode: "range",
       dateFormat: "d.m.y",
       allowInput: true,
-      showMonths: 2
+      showMonths: 2,
+      onOpen: function () {
+        const arrow = document.getElementById('datepicker-arrow');
+        if (arrow) arrow.classList.add('datepicker-arrow--open');
+      },
+      onClose: function () {
+        const arrow = document.getElementById('datepicker-arrow');
+        if (arrow) arrow.classList.remove('datepicker-arrow--open');
+      }
     });
   }
 
