@@ -723,12 +723,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const position = context.chart.canvas.getBoundingClientRect();
             tooltipEl.style.opacity = 1;
-            tooltipEl.style.left =
-              position.left +
-              window.pageXOffset +
-              tooltipModel.caretX +
-              20 +
-              "px";
+            const chartWidth = position.right - position.left;
+            // Если курсор правее 75% ширины графика — тултип слева, иначе справа
+            if (tooltipModel.caretX > chartWidth * 0.75) {
+              tooltipEl.style.left =
+                position.left + window.pageXOffset + tooltipModel.caretX - tooltipEl.offsetWidth - 20 + "px";
+            } else {
+              tooltipEl.style.left =
+                position.left + window.pageXOffset + tooltipModel.caretX + 20 + "px";
+            }
             tooltipEl.style.top =
               position.top +
               window.pageYOffset +
