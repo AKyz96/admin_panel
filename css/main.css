@@ -174,7 +174,7 @@ body {
   top: 50%;
   width: 20px;
   height: 20px;
-  background: url('data:image/svg+xml;utf8,<svg fill="%23888" height="20" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M5.516 7.548a.75.75 0 0 1 1.06 0L10 10.97l3.424-3.423a.75.75 0 1 1 1.06 1.06l-3.954 3.954a.75.75 0 0 1-1.06 0L5.516 8.608a.75.75 0 0 1 0-1.06z"/></svg>') no-repeat center;
+  background: url('data:image/svg+xml;utf8,<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 7.5L10 12.5L15 7.5" stroke="%23667085" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/></svg>') no-repeat center;
   transform: translateY(-50%);
   pointer-events: none;
   transition: transform 0.2s ease;
@@ -199,6 +199,7 @@ body {
   top: 48px;
   background: #fff;
   border-radius: 12px;
+  box-shadow: 0 4px 6px -2px rgba(16, 24, 40, 0.03), 0 12px 16px -4px rgba(16, 24, 40, 0.08);
   z-index: 10;
 }
 
@@ -395,8 +396,9 @@ body {
   margin: 24px 32px 0px;
   background: #fff;
   border-radius: 16px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
-  padding: 24px 0;
+  border: 1px solid #EAECF0;
+  box-shadow: 0 1px 2px 0px rgba(16, 24, 40, 0.06), 0 1px 3px 0px rgba(16, 24, 40, 0.1);
+  padding: 24px 0 0 0;
 }
 
 .table-header-row-container {
@@ -462,13 +464,47 @@ body {
   border-left: 1px solid #eaecf0;
 }
 
-.stats-table thead th:last-child {
+.stats-table thead th:first-child {
+  border-left: none;
+}
+
+.stats-table thead th:nth-child(3) {
+  border-left: none;
+}
+
+.stats-table thead th:nth-child(2) {
   border-right: 1px solid #eaecf0;
 }
 
 .stats-table tbody tr {
   border-bottom: 1px solid #f0e9f2;
   transition: background 0.2s;
+}
+
+.stats-table tbody tr td:last-child {
+  border-right: none;
+}
+
+.stats-table tbody tr:last-child {
+  border-bottom: none;
+  border-radius: 0 0 16px 16px;
+}
+
+.stats-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.stats-table tbody tr td:nth-child(3) {
+  border-left: none;
+  border-right: none;
+}
+
+.stats-table tbody tr td:nth-child(2) {
+  border-right: 1px solid #eaecf0;
+}
+
+.stats-table tbody tr td:first-child {
+  border-left: none;
 }
 
 .stats-table tbody tr:hover {
@@ -571,22 +607,19 @@ input:checked + .slider::before {
 
 .filter-datepicker {
   border: 1px solid #d0d5dd;
+  z-index: 1;
   border-radius: 10px;
   padding: 10px 38px 10px 14px;
   font-size: 14px;
   line-height: 22px;
   color: #101828;
-  background: #fff;
+  background: transparent;
   outline: none;
   width: 210px;
   box-sizing: border-box;
   font-family: inherit;
   font-weight: 500;
   position: relative;
-  background-image: url('data:image/svg+xml;utf8,<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 10L12 14L16 10" stroke="%239CA3AF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>');
-  background-repeat: no-repeat;
-  background-position: right 12px center;
-  background-size: 24px 24px;
 }
 
 .filter-datepicker:focus {
@@ -670,6 +703,7 @@ input:checked + .slider::before {
 .xls-btn {
   display: flex;
   align-items: center;
+  cursor: pointer;
   color: #344054;
   padding: 10px 16px;
   background: #fff;
@@ -728,14 +762,33 @@ input:checked + .slider::before {
 
 .date-picker-container {
   position: relative;
+  z-index: 1;
 }
 
 .datepicker-arrow {
+  position: absolute;
+  z-index: 0;
+  width: 20px;
+  height: 20px;
+  right: 15px;
+  top: 13px;
   transition: transform 0.2s;
 }
 
 .datepicker-arrow--open {
   transform: rotate(180deg);
+}
+
+.cur-month {
+  font-weight: 500 !important;
+}
+
+.cur-month:hover {
+  background: transparent !important;
+}
+
+.flatpickr-current-month .numInputWrapper:hover {
+  background: transparent !important;
 }
 
 /*# sourceMappingURL=main.css.map */

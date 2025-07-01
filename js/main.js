@@ -49,10 +49,10 @@ document.addEventListener("DOMContentLoaded", function () {
       if (val.length > 2) formatted += "." + val.slice(2, 4);
       if (val.length > 4) formatted += "." + val.slice(4, 6);
 
-      // Если есть 6 символов (первая дата полностью) и начинается вторая дата
+
       if (val.length > 6) {
         formatted += " - ";
-        // Вторая дата
+
         formatted += val.slice(6, 8);
         if (val.length > 8) formatted += "." + val.slice(8, 10);
         if (val.length > 10) formatted += "." + val.slice(10, 12);
@@ -60,16 +60,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
       this.value = formatted;
 
-      // flatpickr: если введено 6 или 12 цифр (две даты полностью)
+
       if (window.flatpickr && this._flatpickr) {
         if (val.length === 6) {
-          // одна дата
-          const d = formatted.slice(0, 8); // 09.06.25
+
+          const d = formatted.slice(0, 8); 
           this._flatpickr.setDate(d, true, "d.m.y");
         } else if (val.length === 12) {
-          // диапазон
-          const d1 = formatted.slice(0, 8); // 09.06.25
-          const d2 = formatted.slice(11, 19); // 20.06.25
+
+          const d1 = formatted.slice(0, 8); 
+          const d2 = formatted.slice(11, 19); 
           this._flatpickr.setDate([d1, d2], true, "d.m.y");
         }
       }
@@ -472,13 +472,13 @@ document.addEventListener("DOMContentLoaded", function () {
           max: max,
           display: true,
           ticks: { color: "#222" },
-          grid: { color: "#e9edf1" },
+          grid: { color: "#e9edf1", drawTicks: false },
         },
         y1: {
           type: "linear",
           position: "right",
           display: false,
-          grid: { drawOnChartArea: false, color: "#e9edf1" },
+          grid: { drawOnChartArea: false, color: "#e9edf1", drawTicks: false },
           ticks: {
             callback: function (value) {
               const minutes = value;
@@ -511,6 +511,7 @@ document.addEventListener("DOMContentLoaded", function () {
         minRight = 0;
         maxRight = maxRight + 1;
       }
+      const tickCount = 10;
       return {
         y: {
           type: "linear",
@@ -518,8 +519,15 @@ document.addEventListener("DOMContentLoaded", function () {
           min: minLeft,
           max: maxLeft,
           display: true,
-          ticks: { color: "#222" },
-          grid: { color: "#e9edf1" },
+          ticks: {
+            color: "#222",
+            count: tickCount,
+            padding: 8,
+            callback: function(value) {
+              return Math.round(value);
+            }
+          },
+          grid: { color: "#e9edf1", drawTicks: false },
         },
         y1: {
           type: "linear",
@@ -527,20 +535,19 @@ document.addEventListener("DOMContentLoaded", function () {
           min: minRight,
           max: maxRight,
           display: true,
-          grid: { drawOnChartArea: false, color: "#e9edf1" },
+          grid: { drawOnChartArea: false, color: "#e9edf1", drawTicks: false },
           ticks: {
+            count: tickCount,
+            padding: 8,
             callback: function (value) {
               if (lineRight.label === "Durée") {
                 const minutes = value;
                 const roundedMinutes = Math.round(minutes);
-                const h = String(Math.floor(roundedMinutes / 60)).padStart(
-                  2,
-                  "0"
-                );
+                const h = String(Math.floor(roundedMinutes / 60)).padStart(2, "0");
                 const m = String(roundedMinutes % 60).padStart(2, "0");
                 return `${h}:${m}:00`;
               }
-              return value;
+              return Math.round(value);
             },
             color: "#222",
           },
@@ -562,7 +569,7 @@ document.addEventListener("DOMContentLoaded", function () {
           type: "linear",
           position: "left",
           display: true,
-          grid: { drawOnChartArea: true, color: "#e9edf1" },
+          grid: { drawOnChartArea: true, color: "#e9edf1", drawTicks: false },
           min: 0,
           max: 1,
           ticks: { display: false },
@@ -582,7 +589,7 @@ document.addEventListener("DOMContentLoaded", function () {
           min: min,
           max: max,
           display: false,
-          grid: { drawOnChartArea: false },
+          grid: { drawOnChartArea: false, drawTicks: false },
           ticks: { display: false }
         };
       });
@@ -595,13 +602,13 @@ document.addEventListener("DOMContentLoaded", function () {
         position: "left",
         display: false,
         ticks: { color: "#222" },
-        grid: { color: "#e9edf1" },
+        grid: { color: "#e9edf1", drawTicks: false },
       },
       y1: {
         type: "linear",
         position: "right",
         display: false,
-        grid: { drawOnChartArea: false, color: "#e9edf1" },
+        grid: { drawOnChartArea: false, color: "#e9edf1", drawTicks: false },
         ticks: {
           callback: function (value) {
             const minutes = value;
@@ -627,7 +634,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const verticalLinePlugin = {
     id: "verticalLinePlugin",
-    afterDraw: function (chart) {
+    beforeDatasetsDraw: function (chart) {
       if (chart.tooltip?._active && chart.tooltip._active.length) {
         const ctx = chart.ctx;
         ctx.save();
